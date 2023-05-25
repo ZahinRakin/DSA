@@ -1,4 +1,7 @@
-int matrix[10][10],vertices,d[10],f[10],prev[10],color[10],time;
+#include <stdio.h>
+#include <stdlib.h>
+
+int matrix[10][10],vertices,d[10],f[10],prev[10],color[10],time;//discovery time , final time;
 
 void DFS_Visit(int vertex){
     color[vertex]=1;
@@ -22,7 +25,7 @@ int main(){
     printf("Enter the number of vertices: ");
     scanf("%d",&vertices);
 
-    printf("\nEnter the matrix");
+    printf("\nEnter the matrix: \n");
     for(int i=0;i<vertices;i++)
         for(int j=0;j<vertices;j++){
             scanf("%d",&matrix[i][j]);
