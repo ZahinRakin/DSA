@@ -21,42 +21,25 @@ void mergeSort(int* arr , int start , int end){
 }
 
 void merge(int* arr, int start, int mid , int end){
-    int i;
-    int j;
-    int k;
-    i = 0;
-    j = 0;
-    k = start;
+    int i = 0;
+    int j = 0;
+    int k = start;
     int n1 = mid - start + 1; 
     int n2 = end - mid;
     int L[n1];
-    for(int p = 0 ; p < n1 ; p++){
+    for(int p = 0 ; p < n1 ; p++)
         L[p] = arr[start + p];
-    }
     int R[n2];
-    for(int p = 0 ; p < n2 ; p++){
+    for(int p = 0 ; p < n2 ; p++)
         R[p] = arr[mid + p + 1];
-    }
     while(i < n1 && j < n2){
-        if(L[i] < R[j]){
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
-        else{
-            arr[k] = R[j];
-            k++;
-            j++;
-        }
+        if(L[i] < R[j])
+            arr[k++] = L[i++];
+        else
+            arr[k++] = R[j++];
     }
-    while(i < n1){
-        arr[k] = L[i];
-        k++;
-        i++;
-    }
-    while(j < n2){
-        arr[k] = R[j];
-        k++;
-        j++;
-    }
+    while(i < n1)
+        arr[k++] = L[i++];
+    while(j < n2)
+        arr[k++] = R[j++];
 }
