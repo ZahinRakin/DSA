@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_VERT 50
+#define max 50
 
-int mat[MAX_VERT][MAX_VERT];
+int mat[max][max];
 int vert;
-int color[MAX_VERT];
+int  ds[max];
+int color[max] = {0};
+int q[max];
+int front = 0;
+int rear = 0;
 
-void BFS(int);
+void BFS(int s);
+void push(int);
+void pop();
+int getFront();
 
 void main(){
     printf("verteces: ");
@@ -21,18 +28,29 @@ void main(){
 
 void BFS(int s){
     color[s] = 1;
-    int queue[vert];
-    int front = 0;
-    int rear = 0;
-    queue[rear++] = s;
+    ds[s] = 0;
+    push(s);
     while(front != rear){
-        s = queue[front++];
-        printf("%d ",s);
+        s = getFront();
+        pop();
         for(int i = 0 ; i < vert ; i++){
             if(!color[i] && mat[s][i]){
                 color[i] = 1;
-                queue[rear++] = i;
+                ds[i] = ds[s] + 1;
+                push(i);
             }
         }
     }
+}
+
+void push(int s){
+    q[rear++] = s;
+}
+
+void pop(){
+    printf("%d ",q[front++]);
+}
+
+int getFront(){
+    return q[front];
 }
