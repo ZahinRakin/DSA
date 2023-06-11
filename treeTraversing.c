@@ -79,7 +79,7 @@ struct node* search(int data) {
 }
 
 void pre_order_traversal(struct node* root) {
-   if(root != NULL) {
+   if(root) {
       printf("%d ",root->data);
       pre_order_traversal(root->leftChild);
       pre_order_traversal(root->rightChild);
@@ -87,7 +87,7 @@ void pre_order_traversal(struct node* root) {
 }
 
 void inorder_traversal(struct node* root) {
-   if(root != NULL) {
+   if(root) {
       inorder_traversal(root->leftChild);
       printf("%d ",root->data);          
       inorder_traversal(root->rightChild);
@@ -95,7 +95,7 @@ void inorder_traversal(struct node* root) {
 }
 
 void post_order_traversal(struct node* root) {
-   if(root != NULL) {
+   if(root) {
       post_order_traversal(root->leftChild);
       post_order_traversal(root->rightChild);
       printf("%d ", root->data);

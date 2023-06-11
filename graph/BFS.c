@@ -1,61 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#define MAX_VERTEX 50
+#define MAX_VERTECES 50
 
-typedef struct graph_t{
-    int vertex;
-    bool adj[MAX_VERTEX][MAX_VERTEX];
-}graph;
+int mat[MAX_VERTECES][MAX_VERTECES];
+int verteces;
+int color[MAX_VERTECES] = {0};
+int prev[MAX_VERTECES] = {-1};
+int dt[MAX_VERTECES] = {99999};
+int ft[MAX_VERTECES] = {99999};
+int time = 0;
 
-graph* createGraph(int);
-void BFS(graph* , int);
+void BFS(int);
 
 void main(){
-    graph* g = createGraph(5);
-    g->adj[0][1] = true;
-    g->adj[1][0] = true;
-    g->adj[0][2] = true;
-    g->adj[2][0] = true;
-    g->adj[0][3] = true;
-    g->adj[3][0] = true;
-    g->adj[2][3] = true;
-    g->adj[3][2] = true;
-    g->adj[1][4] = true;
-    g->adj[4][1] = true;
-    printf("this is the graph:\n");
-
-    printf("here is the BFS traversal: ");
-    BFS(g , 2);
+    printf("verteces: ");
+    scanf("%d",&verteces);
+    for(int i = 0 ; i < verteces ; i++)
+        for(int j = 0 ; j < verteces ; j++)
+            scanf("%d",&mat[i][j]);
+    printf("BFS: ");
+    BFS(3);
 }
 
-graph* createGraph(int vertex){
-    graph* g = malloc(sizeof(graph));
-    g->vertex = vertex;
-    bool adj[vertex][vertex];
-    for(int i = 0 ; i < vertex ; i++)
-        for(int j = 0 ; j < vertex ; j++)
-            adj[i][j] = false;
-    return g;
-}
-
-void BFS(graph* g , int s){
-    int i = 0;
-    int j = 0;
-    bool visited[g->vertex];
-    for(int ii = 0 ; ii < g->vertex ; ii++)
-        visited[ii] = false;
-    int queue[g->vertex];
-    visited[s] = true;
-    queue[j++] = s;
-    while(i!=j){
-        s = queue[i++];
-        printf("%d ",s);
-        for(int k = 0 ; k < g->vertex ; k++){
-            if(!visited[k] && g->adj[s][k]){
-                visited[k] = true;
-                queue[j++] = k;
+void BFS(int s){
+    color[s] = 1;
+    dt[s] = ++time;
+    int queue[verteces];
+    int front = 0;
+    int rear = 0;
+    queue[rear++] = s;
+    while(front != rear){
+        s = queue[front++];
+        printf("%d ",s );
+        ft[s] = ++time;
+        color[s] = 2;
+        for(int i = 0 ; i < verteces ; i++){
+            if(!color[i] && mat[s][i]){
+                prev[i] = s;
+                color[i] = 1;
+                dt[i] = ++time;
+                queue[rear++] = i;
             }
         }
     }
+
 }
