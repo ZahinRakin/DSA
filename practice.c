@@ -4,16 +4,16 @@
 
 int mat[max][max];
 int vert;
-int  ds[max];
 int color[max] = {0};
-int q[max];
+int ds[max] = {99999};
+int Q[max] = {0};
 int front = 0;
 int rear = 0;
 
 void BFS(int);
 void push(int);
 void pop();
-int getFront();
+int getF();
 
 void main(){
     printf("verteces: ");
@@ -31,10 +31,10 @@ void BFS(int s){
     ds[s] = 0;
     push(s);
     while(front != rear){
-        s = getFront();
+        s = getF();
         pop();
-        for(int i = 0 ; i < vert ; i++){
-            if(!color[i] && mat[s][i]){
+        for(int i = 0; i < vert; i++){
+            if(mat[s][i] && !color[i]){
                 color[i] = 1;
                 ds[i] = ds[s] + 1;
                 push(i);
@@ -44,13 +44,13 @@ void BFS(int s){
 }
 
 void push(int s){
-    q[rear++] = s;
+    Q[rear++] = s;
 }
 
 void pop(){
-    printf("%d ",q[front++]);
+    printf("%d ",Q[front++]);
 }
 
-int getFront(){
-    return q[front];
+int getF(){
+    return Q[front];
 }
