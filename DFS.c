@@ -15,8 +15,8 @@ void DFS_Visit(int vertex){
     }
     printf("%d--",vertex);
     color[vertex]=2;
-    time++;
-    f[vertex]=time;
+   
+    f[vertex]=++time;
 
 }
 
